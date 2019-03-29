@@ -2,9 +2,9 @@
 
 function getAnimalsDao () {
 
-    const getAnimalById = (id) => {
-        console.log("animalDao called for id: " + id);
-        return {id};
+    const getAnimalByName = (name) => {
+        console.log("animalDao called for name: " + name);
+        return {name};
     }
 
     return {
