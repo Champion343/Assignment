@@ -3,7 +3,9 @@
 //create elements
 let div = document.createElement('div');
 let select = document.createElement('select');
-let description = document.createElement('p');
+let description = document.createElement('span');
+
+div.display = 'inline-block';
 
 //attach elements to document
 document.body.appendChild(div);
@@ -70,6 +72,7 @@ description.innerText = animals[0].description;
 
 //listener to change description text when option changes
 select.addEventListener('change', function (inp) {
-  console.log(this.value);
+  
+  //debugging console.log(this.value);
   description.innerText = animals[this.value].description;
 });
