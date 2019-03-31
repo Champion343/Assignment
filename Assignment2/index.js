@@ -18,8 +18,13 @@ router.get('/animals/:id', function (req, res, next) {
   animalsDao.getAnimalById(req.params.id)
     .then(animal => {
       console.log(animal);
-      res.setHeader('Content-Type', 'application/json');
-      return res.end(JSON.stringify(animal));
+      if (animal) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.send(JSON.stringify(animal));
+      } else {
+        res.status(404)
+          .send('Not found');
+      }
     });
 
 })
