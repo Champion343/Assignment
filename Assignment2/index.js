@@ -11,7 +11,7 @@ const   dbUsername = process.argv[2],
 
 //uri for retrieving an animal
 router.get('/animals/:name', function (req, res, next) {
-  let animal = animalsDao.getAnimalById(req.params.name);
+  let animal = animalsDao.getAnimalByName(req.params.name);
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(animal));
 })
