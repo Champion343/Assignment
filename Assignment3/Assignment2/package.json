@@ -1,0 +1,15 @@
+{
+  "name": "assignment2",
+  "version": "1.0.0",
+  "description": "backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "set dbUsername=test&& set dbPassword=test&& set dbHost=animalsdb.cmpryerypw0y.us-east-2.rds.amazonaws.com&& set dbPort=5432&& mocha --reporter-spec"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mocha": "^6.0.2"
+  }
+}
