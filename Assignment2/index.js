@@ -11,7 +11,6 @@ const dbUsername = process.argv[2],
   app = express(),
   port = 3000;
 
-console.log(process.argv);
 //uri for retrieving an animal
 router.get('/animals/:id', function (req, res, next) {
 
