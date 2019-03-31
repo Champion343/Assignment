@@ -63,7 +63,6 @@ for (let i = 0; i < animals.length; ++i) {
   option = document.createElement('option');
   option.value = i;
   option.text = animals[i].name;
-  option.description = 'wow';
   select.appendChild(option);
 };
 

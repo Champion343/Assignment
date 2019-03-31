@@ -37,7 +37,7 @@ function getAnimalsDao(dbUsername, dbPassword, dbHost, dbPort) {
           console.log('ERROR: could not retrieve animals');
           reject(error);
         }
-        console.log(results.rows);
+        //console.log(results.rows);
         resolve(results.rows);
       })
     })

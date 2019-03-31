@@ -12,11 +12,11 @@ const dbUsername = process.argv[2],
   port = 3000;
 
 //uri for retrieving an animal
-router.get('/animals/:id', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
 
   animalsDao.getAnimalById(req.params.id)
     .then(animal => {
-      console.log(animal);
+      //console.log(animal);
       if (animal) {
         res.setHeader('Content-Type', 'application/json');
         return res.send(JSON.stringify(animal));
@@ -29,9 +29,9 @@ router.get('/animals/:id', function (req, res, next) {
 })
 
 //uri for retrieving all animals
-router.get('/animals', function (req, res, next) {
+router.get('/', function (req, res, next) {
   animalsDao.getAnimals().then(animals => {
-    console.log(animals);
+    //console.log(animals);
     res.setHeader('Content-Type', 'application/json');
     return res.end(JSON.stringify(animals));
   });
