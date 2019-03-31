@@ -19,9 +19,9 @@ describe('animals-dao-spec setup', function () {
 
   describe('animalsDao is working if', function () {
 
-    it('it returns an animal by name', function (done) {
+    it('it returns an animal by id', function (done) {
 
-      let animal = animalsDao.getAnimalByName('cat');
+      let animal = animalsDao.getAnimalById(1);
       assert.equal(animal.name, 'cat');
       done();
     })
