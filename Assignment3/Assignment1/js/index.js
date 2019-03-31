@@ -12,67 +12,42 @@ document.body.appendChild(div);
 div.appendChild(select);
 div.appendChild(description);
 
+function httpGetAnimalById(id) {
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      description.innerText = JSON.parse(xhttp.responseText).description;
+    }
+  };
+  xhttp.open("GET", `http://localhost:3000/${id}`, true);
+  xhttp.send();
+}
 
-//initialize animals json array
-let animals = [
-  {
-    name: 'cat',
-    description: 'owners of the human race.'
-  },
-  {
-    name: 'dog',
-    description: 'primarily eats shoes and couches.'
-  },
-  {
-    name: 'human',
-    description: 'honestly just another bipedal animal.'
-  },
-  {
-    name: 'alicorn',
-    description: "mythical horse with wings and horn according to coworker's daughter."
-  },
-  {
-    name: 'zebra',
-    description: 'see horse but striped.'
-  },
-  {
-    name: 'horse',
-    description: 'see zebra but unstriped.'
-  },
-  {
-    name: 'honey badger',
-    description: "dangerous beast that just doesn't care."
-  },
-  {
-    name: 'snake',
-    description: 'danger noodle.'
-  },
-  {
-    name: 'seahorse',
-    description: 'aquatic horse.'
-  },
-  {
-    name: 'zorse',
-    description: 'see horse and zebra.'
-  }
-];
+function httpGetAnimals() {
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let animals = JSON.parse(xhttp.responseText);
+      //create options from json and append to select
+      let option;
+      for (let i = 1; i < animals.length + 1; ++i) {
+        option = document.createElement('option');
+        option.value = i;
+        option.text = animals[i - 1].name;
+        select.appendChild(option);
+      };
+      //initialize starting text
+      description.innerText = animals[0].description;
 
-//create options from json and append to select
-let option;
-for (let i = 0; i < animals.length; ++i) {
-  option = document.createElement('option');
-  option.value = i;
-  option.text = animals[i].name;
-  option.description = 'wow';
-  select.appendChild(option);
-};
+    }
+  };
+  xhttp.open("GET", "http://localhost:3000/", true);
+  xhttp.send();
+}
 
-//initialize starting text
-description.innerText = animals[0].description;
+httpGetAnimals();
 
 //listener to change description text when option changes
 select.addEventListener('change', function (inp) {
-  
-  //debugging console.log(this.value);
-  description.innerText = animals[this.value].description;
+  httpGetAnimalById(this.value);
 });

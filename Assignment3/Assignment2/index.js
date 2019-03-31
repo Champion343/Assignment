@@ -13,12 +13,15 @@ const dbUsername = process.argv[2],
 
 console.log(process.argv);
 //uri for retrieving an animal
-router.get('/animals/:id', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
 
   animalsDao.getAnimalById(req.params.id)
     .then(animal => {
-      console.log(animal);
+      //console.log(animal);
       if (animal) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Authorization');
+        res.header('Access-Control-Allow-Methods', 'GET');
         res.setHeader('Content-Type', 'application/json');
         return res.send(JSON.stringify(animal));
       } else {
@@ -30,9 +33,12 @@ router.get('/animals/:id', function (req, res, next) {
 })
 
 //uri for retrieving all animals
-router.get('/animals', function (req, res, next) {
+router.get('/', function (req, res, next) {
   animalsDao.getAnimals().then(animals => {
-    console.log(animals);
+    //console.log(animals);
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET');
     res.setHeader('Content-Type', 'application/json');
     return res.end(JSON.stringify(animals));
   });
