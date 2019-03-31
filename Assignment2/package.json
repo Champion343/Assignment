@@ -4,7 +4,7 @@
   "description": "backend",
   "main": "index.js",
   "scripts": {
-    "test": "set dbUsername=user&& set dbPassword=pw&& mocha --reporter-spec"
+    "test": "set dbUsername=test&& set dbPassword=test&& set dbHost=animalsdb.cmpryerypw0y.us-east-2.rds.amazonaws.com&& set dbPort=5432&& mocha --reporter-spec"
   },
   "author": "",
   "license": "ISC",

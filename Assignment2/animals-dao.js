@@ -5,8 +5,9 @@ const pg = require('pg');
 function getAnimalsDao(dbUsername, dbPassword, dbHost, dbPort) {
 
   //create pool to hold connections
-  const pool = new Pool({
+  const pool = new pg.Pool({
     user: dbUsername,
+    database: 'postgres',
     password: dbPassword,
     host: dbHost,
     port: dbPort
@@ -14,23 +15,31 @@ function getAnimalsDao(dbUsername, dbPassword, dbHost, dbPort) {
 
   const getAnimalById = (id) => {
 
-    return pool.query('SELECT * FROM animals WHERE id = $1', [id], (error, results) => {
-      if (error) {
-        console.log('ERROR: could not retrieve animal for id: ' + id);
-        return 'error';
-      }
-      return { id };
+    return new Promise((resolve, reject) => {
+      return pool.query('SELECT * FROM animal WHERE id = $1', [id], (error, results) => {
+        if (error) {
+          console.log(error);
+          console.log('ERROR: could not retrieve animal for id: ' + id);
+          reject(error);
+        }
+        console.log(results.rows[0]);
+        resolve(results.rows[0]);
+      })
     })
   }
 
   const getAnimals = () => {
 
-    return pool.query('SELECT * FROM animals', (error, results) => {
-      if (error) {
-        console.log('ERROR: could not retrieve all animals');
-        return 'error';
-      }
-      return results.rows;
+    return new Promise((resolve, reject) => {
+      return pool.query('SELECT * FROM animal', (error, results) => {
+        if (error) {
+          console.log(error);
+          console.log('ERROR: could not retrieve animals');
+          reject(error);
+        }
+        console.log(results.rows);
+        resolve(results.rows);
+      })
     })
   }
 
