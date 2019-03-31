@@ -8,7 +8,7 @@ function getAnimalsDao () {
     }
 
     return {
-        getAnimalById
+        getAnimalByName
     }
 
 }
